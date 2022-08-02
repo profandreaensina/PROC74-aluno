@@ -14,8 +14,7 @@ export default class SearchScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allTransactions: [],
-      lastVisibleTransaction: null,
+      // 01) adicionar dois estados, um para a matriz de transações, outro para a ultima transação visivel
       searchText: ""
     };
   }
@@ -28,11 +27,9 @@ export default class SearchScreen extends Component {
       .limit(10)
       .get()
       .then(snapshot => {
-        snapshot.docs.map(doc => {
-          this.setState({
-            allTransactions: [...this.state.allTransactions, doc.data()],
-            lastVisibleTransaction: doc
-          });
+        snapshot.docs.map(
+          // 02) adicionar novo documento da matriz no estado
+        );
         });
       });
   };
@@ -110,12 +107,7 @@ export default class SearchScreen extends Component {
   };
 
   renderItem = ({ item, i }) => {
-    var date = item.date
-      .toDate()
-      .toString()
-      .split(" ")
-      .splice(0, 4)
-      .join(" ");
+    var date = // 03. modificar dados da data, lida do firestore
 
     var transactionType = item.transaction_type === "issue" ? "issued" : "returned";
     
